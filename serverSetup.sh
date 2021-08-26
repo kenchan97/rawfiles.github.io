@@ -110,4 +110,4 @@ sed -i '/serverRun/d' /etc/rc.d/rc.local
 sed -i '/aria2c/d' /etc/rc.d/rc.local
 echo '/home/wwwroot/serverRun.sh' >> /etc/rc.d/rc.local
 dos2unix /home/wwwroot/serverRun.sh
-
+reboot
