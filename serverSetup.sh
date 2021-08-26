@@ -1,6 +1,6 @@
 #!/bin/sh
 
-############################CENTOS7 SETUP
+echo "========================SERVER SETUP========================"
 systemctl mask firewalld
 systemctl stop firewalld
 yum remove -y firewalld
@@ -42,11 +42,12 @@ yum groupinstall -y "Development tools"
 yum install -y openssl openssl-devel
 yum -y update
 
-
+echo "========================NET CORE SETUP========================"
 ############################.Net 5
 sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 sudo yum install dotnet-sdk-5.0 dotnet-runtime-5.0 aspnetcore-runtime-5.0 openssh-server unzip curl -y
 
+echo "========================PHP 7.2 SETUP========================"
 ############################PHP
 yum-config-manager --enable remi-php72
 yum install -y php php-fpm php-common  php-pear php-cli php-devel php-pdo php-mysqlnd php-mbstring php-gd php-tidy php-xml php-ssh2 php-xmlrpc php-pear php-imap php-opcache php-process php-redis php-bcmath
@@ -68,7 +69,7 @@ printf "\n" | pecl install imagick
 echo "extension=imagick.so" >> /etc/php.ini
 #####################################
 
-
+echo "========================SWOOLE SETUP========================"
 ############################SWLLOE
 yum install -y libevent-devel openssl-devel nghttp2 libnghttp2-devel
 echo "extension=sockets.so" >> /etc/php.ini
@@ -110,4 +111,5 @@ sed -i '/serverRun/d' /etc/rc.d/rc.local
 sed -i '/aria2c/d' /etc/rc.d/rc.local
 echo '/home/wwwroot/serverRun.sh' >> /etc/rc.d/rc.local
 dos2unix /home/wwwroot/serverRun.sh
+echo "========================REBOOT========================"
 reboot
