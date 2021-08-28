@@ -1,4 +1,5 @@
-
+#!/bin/sh
+echo "========================Start FFMPEG Setup========================"
 ################################################################FFMPEG
 ##https://superuser.com/questions/1214396/how-to-compile-ffmpeg-with-h-265-h-264-and-vp9-support-on-centos/1226089
 
@@ -26,7 +27,7 @@ cd yasm-1.3.0
 make
 make install
 
-
+echo "========================Start H264 Setup========================"
 ####################H.264
 cd ~/ffmpeg_sources
 git clone --depth 1 http://git.videolan.org/git/x264.git
@@ -34,7 +35,7 @@ cd x264
 PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static
 PATH="$HOME/bin:$PATH" make
 PATH="$HOME/bin:$PATH" make install
-
+echo "========================Start H265 Setup========================"
 ####################H.265
 cd ~/ffmpeg_sources
 hg clone http://hg.videolan.org/x265
@@ -43,7 +44,7 @@ cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build" -DENABLE_S
 make
 make install
 
-
+echo "========================Start AAC Setup========================"
 ######################aac
 cd ~/ffmpeg_sources
 git clone --depth 1 https://github.com/mstorsjo/fdk-aac
@@ -75,7 +76,7 @@ cd libtheora-1.1.1
 ./configure --prefix="$HOME/ffmpeg_build" --with-ogg="$HOME/ffmpeg_build" --disable-shared
 make
 make install 
-
+echo "========================Start MAKR INSTALL Setup========================"
 mv /usr/local/bin/ffmpeg /usr/local/bin/ffmpeg_old
 mv /root/bin/ffmpeg /root/bin/ffmpeg_old
 cd ~/ffmpeg_sources
@@ -91,3 +92,4 @@ ffmpeg -version
 ffmpeg -encoders | grep H.26
 
 ################################################################FFMPEG
+echo "========================FINISHED FFMPEG Setup========================"
