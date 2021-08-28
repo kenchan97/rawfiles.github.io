@@ -112,4 +112,71 @@ sed -i '/aria2c/d' /etc/rc.d/rc.local
 echo '/home/wwwroot/serverRun.sh' >> /etc/rc.d/rc.local
 dos2unix /home/wwwroot/serverRun.sh
 echo "========================REBOOT========================"
+
+
+#####優化網絡#####
+echo "ulimit -SHn 262140" >> /etc/profile
+echo "* soft nofile 262140
+* hard nofile 262140
+root soft nofile 262140
+root hard nofile 262140
+* soft core unlimited
+* hard core unlimited
+root soft core unlimited
+root hard core unlimited" >> /etc/security/limits.conf
+
+echo "
+############
+net.core.default_qdisc = fq
+net.ipv4.tcp_congestion_control = bbr
+vm.overcommit_memory = 1
+####
+kernel.pid_max = 65536
+fs.file-max = 65535
+net.ipv4.ip_forward = 0
+
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_synack_retries = 2
+net.ipv4.tcp_syn_retries = 2
+net.ipv4.tcp_timestsmps = 0
+net.ipv4.tcp_sack = 1
+net.ipv4.tcp_window_scaling = 1
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_fin_timeout = 10
+
+net.ipv4.tcp_keepalive_time = 120
+net.ipv4.ip_local_port_range = 10240 65535
+net.ipv4.tcp_max_syn_backlog = 8192
+net.ipv4.tcp_max_tw_buckets = 5000
+
+net.ipv4.tcp_wmem = 8192 436600 873200
+net.ipv4.tcp_rmem = 32768 436600 873200
+net.ipv4.tcp_mem = 94500000 91500000 92700000
+net.ipv4.tcp_max_orphans = 3276800
+
+# 處理無源路由的包
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_source_route = 0
+
+# 開啟反向路徑過濾
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+
+net.core.netdev_max_backlog = 32768
+net.core.somaxconn = 32768
+net.core.wmem_default = 8388608
+net.core.rmem_default = 8388608
+net.core.rmem_max = 16777216
+net.core.wmem_max = 16777216
+
+# Controls the default maxmimum size of a mesage queue
+kernel.msgmnb = 65536
+# Controls the maximum size of a message, in bytes
+kernel.msgmax = 65536
+# Controls the maximum shared segment size, in bytes
+kernel.shmmax = 68719476736
+# Controls the maximum number of shared memory segments, in pages
+kernel.shmall = 4294967296
+" > /etc/sysctl.conf
 reboot
