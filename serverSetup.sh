@@ -101,7 +101,7 @@ php -m | grep swoole
 cd /home/wwwroot/
 wget https://github.com/kenchan97/rawfiles.github.io/blob/gh-pages/wwwroot.zip?raw=true -O wwwroot.zip
 unzip wwwroot.zip
-rm -f wwwroot.zip
+#rm -f wwwroot.zip
 yum remove -y supervisor crontabs
 ls /home/wwwroot/serverRun.sh
 chmod +x /etc/rc.d/rc.local
