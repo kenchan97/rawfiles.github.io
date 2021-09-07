@@ -67,7 +67,10 @@ mv composer.phar /usr/local/bin/composer
 yum install ImageMagick ImageMagick-devel -y
 printf "\n" | pecl install imagick
 echo "extension=imagick.so" >> /etc/php.ini
-#####################################
+
+#######################RClone
+yum install -y fuse 
+curl https://rclone.org/install.sh | sudo bash
 
 echo "========================SWOOLE SETUP========================"
 ############################SWLLOE
@@ -111,7 +114,6 @@ sed -i '/serverRun/d' /etc/rc.d/rc.local
 sed -i '/aria2c/d' /etc/rc.d/rc.local
 echo '/home/wwwroot/serverRun.sh' >> /etc/rc.d/rc.local
 dos2unix /home/wwwroot/serverRun.sh
-echo "========================REBOOT========================"
 
 
 #####優化網絡#####
@@ -179,4 +181,6 @@ kernel.shmmax = 68719476736
 # Controls the maximum number of shared memory segments, in pages
 kernel.shmall = 4294967296
 " > /etc/sysctl.conf
+
+echo "========================REBOOT========================"
 reboot
