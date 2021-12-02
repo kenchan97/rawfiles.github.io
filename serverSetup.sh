@@ -10,9 +10,6 @@ rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 chmod +x /etc/rc.d/rc.local
 
-
-############################
-echo "root:ilove87" | sudo chpasswd
 ############################
 setenforce 0
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
